@@ -1,0 +1,35 @@
+stages:
+  - lint
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip_cache"
+
+cache:
+  paths:
+    - .pip_cache/
+
+before_script:
+  - python -m venv venv
+  - source venv/bin/activate
+  - pip install -r requirements.txt
+  - pip install flake8 autopep8 mypy pytest
+
+lint:
+  stage: lint
+  script:
+    - flake8 .
+    - mypy app1
+  allow_failure: false
+
+test:
+  stage: test
+  script:
+    - pytest --maxfail=3 --disable-warnings
+  allow_failure: false
+
+rules:
+  - if: $CI_PIPELINE_SOURCE == "push"
+    when: on_success
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    when: on_success
