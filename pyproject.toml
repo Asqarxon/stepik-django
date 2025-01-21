@@ -1,16 +1,17 @@
-[tool.poetry]
+[project]
 name = "myproject"
 version = "0.1.0"
-description = "A simple Django project"
-authors = ["Abdulazis"]
+description = ""
+authors = [
+    {name = "Akbarxon",email = "105447839+HasanovAkbarxon@users.noreply.github.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "django (>=5.1.5,<6.0.0)"
+]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-django = "^4.0"
-
-[tool.poetry.dev-dependencies]
-pytest = "^7.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
